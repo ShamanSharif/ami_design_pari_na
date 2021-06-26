@@ -1,3 +1,4 @@
+import 'package:ami_design_pari_na/widgets/logo_widget.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -7,7 +8,7 @@ class SplashScreen extends StatelessWidget {
       body: Center(
         child: Container(
           padding: EdgeInsets.all(90),
-          child: Image(image: AssetImage("assets/images/logo.png")),
+          child: LogoWidget(),
         ),
       ),
     );
