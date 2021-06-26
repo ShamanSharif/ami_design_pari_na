@@ -12,7 +12,6 @@ class LoginScreen extends StatelessWidget {
             image: AssetImage("assets/images/logo.png"),
           ),
           TextField(),
-          TextField(),
           ADPNButton(
             title: "LOGIN",
           )

@@ -1,5 +1,4 @@
 import 'package:ami_design_pari_na/screens/login_screen.dart';
-import 'package:ami_design_pari_na/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -22,6 +21,7 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
+        fontFamily: "Quicksand",
         primarySwatch: Colors.blue,
       ),
       home: LoginScreen(),

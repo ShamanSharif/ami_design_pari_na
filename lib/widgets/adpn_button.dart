@@ -22,6 +22,8 @@ class ADPNButton extends StatelessWidget {
               title,
               style: TextStyle(
                 color: buttonColor,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
