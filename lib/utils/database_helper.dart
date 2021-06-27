@@ -1,4 +1,3 @@
-import 'package:feather_icons/feather_icons.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite/sqlite_api.dart';
 import 'package:path/path.dart';
@@ -11,7 +10,7 @@ class DBProvider {
   static final tableName = "khoj_the_search";
   static final userId = "user_id";
   static final timeStamp = "timestamp";
-  static final values = "values";
+  static final values = "input_data";
 
   Future<Database> get database async {
     if (_database != null) return _database;

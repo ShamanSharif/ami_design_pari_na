@@ -4,7 +4,6 @@ import 'package:ami_design_pari_na/utils/storage.dart';
 import 'package:ami_design_pari_na/widgets/adpn_button.dart';
 import 'package:ami_design_pari_na/widgets/adpn_text_field.dart';
 import 'package:ami_design_pari_na/widgets/logo_widget.dart';
-import 'package:cool_alert/cool_alert.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
