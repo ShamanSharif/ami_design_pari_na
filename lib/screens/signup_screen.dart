@@ -1,6 +1,6 @@
 import 'package:ami_design_pari_na/screens/home_screen.dart';
 import 'package:ami_design_pari_na/utils/constants.dart';
-import 'package:ami_design_pari_na/utils/storage.dart';
+import 'package:ami_design_pari_na/utils/secure_storage.dart';
 import 'package:ami_design_pari_na/widgets/adpn_button.dart';
 import 'package:ami_design_pari_na/widgets/adpn_text_field.dart';
 import 'package:ami_design_pari_na/widgets/logo_widget.dart';

@@ -26,7 +26,7 @@ class DBProvider {
       await db.execute('''CREATE TABLE $tableName (
           $userId TEXT NOT NULL,
           $timeStamp TEXT NOT NULL,
-          $values TEXT NOT NULL,
+          $values TEXT NOT NULL
         )''');
     }, version: 1);
   }
@@ -39,5 +39,15 @@ class DBProvider {
   Future<List<Map<String, dynamic>>> queryAll(String tableName) async {
     Database db = await instance.database;
     return await db.query(tableName);
+  }
+
+  Future<void> dropTable(String tableName) async {
+    Database db = await instance.database;
+    await db.execute('''DROP TABLE $tableName''');
+    await db.execute('''CREATE TABLE $tableName (
+          $userId TEXT NOT NULL,
+          $timeStamp TEXT NOT NULL,
+          $values TEXT NOT NULL
+      )''');
   }
 }

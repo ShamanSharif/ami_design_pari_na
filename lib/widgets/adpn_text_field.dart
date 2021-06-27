@@ -45,7 +45,8 @@ class _ADPNTextFieldState extends State<ADPNTextField> {
             : widget.textInputType,
         obscureText: isObscure,
         cursorColor: brandColor,
-        textInputAction: TextInputAction.next,
+        textInputAction:
+            widget.isSensitive ? TextInputAction.done : TextInputAction.next,
         decoration: InputDecoration(
           suffixIcon: widget.isSensitive
               ? IconButton(
