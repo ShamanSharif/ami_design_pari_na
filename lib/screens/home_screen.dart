@@ -1,8 +1,5 @@
 import 'package:ami_design_pari_na/screens/settings_screen.dart';
-import 'package:ami_design_pari_na/screens/splash_screen.dart';
 import 'package:ami_design_pari_na/utils/constants.dart';
-import 'package:ami_design_pari_na/utils/database_helper.dart';
-import 'package:ami_design_pari_na/utils/secure_storage.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
