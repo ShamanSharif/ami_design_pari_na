@@ -1,6 +1,8 @@
 import 'package:ami_design_pari_na/screens/login_screen.dart';
-import 'package:ami_design_pari_na/screens/splash_screen.dart';
+import 'package:ami_design_pari_na/screens/signup_screen.dart';
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 
 void main() {
   runApp(MyApp());
@@ -23,9 +25,22 @@ class MyApp extends StatelessWidget {
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
         fontFamily: "Quicksand",
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.deepPurple,
       ),
-      home: SplashScreen(),
+      home: AnimatedSplashScreen(
+        nextScreen: LoginScreen(),
+        splash: "assets/images/logo.png",
+        curve: Curves.fastOutSlowIn,
+        duration: 1000,
+        backgroundColor: Colors.white,
+        splashTransition: SplashTransition.fadeTransition,
+        pageTransitionType: PageTransitionType.rightToLeft,
+        splashIconSize: 300,
+      ),
+      routes: {
+        LoginScreen.id: (context) => LoginScreen(),
+        SignUpScreen.id: (context) => SignUpScreen(),
+      },
     );
   }
 }
