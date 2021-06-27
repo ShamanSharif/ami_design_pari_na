@@ -1,10 +1,14 @@
+import 'package:ami_design_pari_na/screens/home_screen.dart';
 import 'package:ami_design_pari_na/screens/login_screen.dart';
 import 'package:ami_design_pari_na/screens/signup_screen.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -40,6 +44,7 @@ class MyApp extends StatelessWidget {
       routes: {
         LoginScreen.id: (context) => LoginScreen(),
         SignUpScreen.id: (context) => SignUpScreen(),
+        HomeScreen.id: (context) => HomeScreen(),
       },
     );
   }

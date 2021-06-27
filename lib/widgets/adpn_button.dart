@@ -17,7 +17,7 @@ class ADPNButton extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(5),
         child: ColoredBox(
-          color: Colors.deepPurple,
+          color: brandColor,
           child: Container(
             width: MediaQuery.of(context).size.width * 0.6,
             height: 50,

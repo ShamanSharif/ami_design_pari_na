@@ -1,9 +1,11 @@
+import 'package:ami_design_pari_na/screens/home_screen.dart';
 import 'package:ami_design_pari_na/utils/constants.dart';
 import 'package:ami_design_pari_na/widgets/adpn_button.dart';
 import 'package:ami_design_pari_na/widgets/adpn_text_field.dart';
 import 'package:ami_design_pari_na/widgets/logo_widget.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUpScreen extends StatefulWidget {
   static const String id = "signup_page";
@@ -12,6 +14,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final _auth = FirebaseAuth.instance;
   String _username;
   String _password;
 
@@ -76,9 +79,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   ADPNButton(
                     title: "SIGN UP",
-                    onTap: () {
-                      print("Username: $_username");
-                      print("Password: $_password");
+                    onTap: () async {
+                      // print("Username: $_username");
+                      // print("Password: $_password");
+                      try {
+                        final newUser =
+                            await _auth.createUserWithEmailAndPassword(
+                          email: _username,
+                          password: _password,
+                        );
+                        if (newUser != null) {
+                          print("Successfully Authenticated.");
+                          Navigator.pushNamed(context, HomeScreen.id);
+                        }
+                      } catch (e) {
+                        print(e);
+                      }
                     },
                   ),
                   IconButton(
@@ -88,7 +104,52 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     onPressed: () => showDialog(
                       context: context,
                       builder: (context) => AlertDialog(
-                        content: Text("HELP?"),
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            RichText(
+                              text: TextSpan(
+                                text: "Username: ",
+                                style: TextStyle(
+                                  color: brandColor,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                children: [
+                                  TextSpan(
+                                    text:
+                                        "username must be at least 3 characters. It may include alphabets and numbers.",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.normal,
+                                      color: dimBlackColor,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            RichText(
+                              text: TextSpan(
+                                text: "Password: ",
+                                style: TextStyle(
+                                  color: brandColor,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                children: [
+                                  TextSpan(
+                                    text:
+                                        "password must be at least 6 characters. It may include alphabet, numbers and symbols.",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.normal,
+                                      color: dimBlackColor,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                         actions: [
                           TextButton(
                             onPressed: () => Navigator.pop(context, 'OK'),
