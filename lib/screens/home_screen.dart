@@ -1,5 +1,8 @@
 import 'dart:math';
 
+import 'package:ami_design_pari_na/screens/splash_screen.dart';
+import 'package:ami_design_pari_na/utils/constants.dart';
+import 'package:ami_design_pari_na/utils/storage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -11,6 +14,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final _auth = FirebaseAuth.instance;
+  final SecureStorage _secureStorage = SecureStorage();
   User loggedInUser;
 
   @override
@@ -25,6 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
       if (_user != null) {
         loggedInUser = _user;
         print(loggedInUser.email);
+      } else {
+        print("no user");
       }
     } catch (e) {
       print(e);
@@ -34,8 +40,30 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Welcome, ${loggedInUser.displayName}",
+          style: TextStyle(
+            color: brandColor,
+          ),
+        ),
+        centerTitle: true,
+        shadowColor: Colors.transparent,
+        backgroundColor: Colors.transparent,
+        foregroundColor: brandColor,
+      ),
       body: Center(
-        child: Text("John Cena"),
+        child: TextButton(
+          onPressed: () async {
+            await _secureStorage.deleteSecureData('email');
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              SplashScreen.id,
+              (route) => false,
+            );
+          },
+          child: Text(loggedInUser.uid),
+        ),
       ),
     );
   }
