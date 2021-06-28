@@ -34,7 +34,6 @@ class _KhojScreenState extends State<KhojScreen> {
       final _user = _auth.currentUser;
       if (_user != null) {
         loggedInUser = _user;
-        print(loggedInUser.email);
       } else {
         print("no user");
       }

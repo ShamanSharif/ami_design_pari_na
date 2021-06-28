@@ -1,12 +1,11 @@
 import 'package:ami_design_pari_na/screens/khoj.dart';
 import 'package:ami_design_pari_na/screens/settings_screen.dart';
 import 'package:ami_design_pari_na/utils/constants.dart';
-import 'package:ami_design_pari_na/utils/database_helper.dart';
-import 'package:ami_design_pari_na/widgets/adpn_button.dart';
-import 'package:ami_design_pari_na/widgets/adpn_text_field.dart';
+import 'package:ami_design_pari_na/utils/photo.dart';
+import 'package:ami_design_pari_na/utils/photo_loader.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:page_transition/page_transition.dart';
 
 class DekhaoScreen extends StatefulWidget {
@@ -16,29 +15,37 @@ class DekhaoScreen extends StatefulWidget {
 }
 
 class _DekhaoScreenState extends State<DekhaoScreen> {
-  final _auth = FirebaseAuth.instance;
-  final _dbProvider = DBProvider.instance;
-  User loggedInUser;
-  String _inputField;
-  String _searchField;
-  bool _result;
+  List<Photo> photos = [];
 
   @override
   void initState() {
     super.initState();
-    getCurrentUser();
+    loadPhotoData();
   }
 
-  void getCurrentUser() {
-    try {
-      final _user = _auth.currentUser;
-      if (_user != null) {
-        loggedInUser = _user;
+  void loadPhotoData() async {
+    PhotoLoader _photoLoader = PhotoLoader();
+    var fetchedData = await _photoLoader.getAlbumData();
+    await getPhotos(fetchedData);
+    setState(() {});
+  }
+
+  Future<void> getPhotos(dynamic fetchedData) async {
+    var i = 0;
+    for (var data in fetchedData) {
+      if (i == 100) {
+        break;
       } else {
-        print("no user");
+        i++;
+        Photo photo = Photo(
+          data["albumId"],
+          data["id"],
+          data["title"],
+          data["thumbnailUrl"],
+          data["url"],
+        );
+        photos.add(photo);
       }
-    } catch (e) {
-      print(e);
     }
   }
 
@@ -48,7 +55,7 @@ class _DekhaoScreenState extends State<DekhaoScreen> {
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
         title: Text(
-          "Welcome, ${loggedInUser.displayName}",
+          "Dekhao Chobi",
           // "Welcome",
           style: TextStyle(
             color: brandColor,
@@ -74,128 +81,12 @@ class _DekhaoScreenState extends State<DekhaoScreen> {
         ),
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Container(
-                child: Image(
-                  image: AssetImage(
-                    _result == null
-                        ? "assets/images/ok.png"
-                        : _result
-                            ? "assets/images/true.png"
-                            : "assets/images/false.png",
-                  ),
-                  width: 350,
-                ),
-              ),
-              Column(
-                children: [
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                    child: ADPNTextField(
-                      onChanged: (value) {
-                        _inputField = value;
-                      },
-                      textInputType: TextInputType.number,
-                      textInputAction: TextInputAction.next,
-                      hintText: "Input (e.g. 2,6,3,1,5,...)",
-                      icon: FeatherIcons.type,
-                      isSensitive: false,
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                    child: ADPNTextField(
-                      onChanged: (value) {
-                        _searchField = value;
-                      },
-                      textInputType: TextInputType.number,
-                      hintText: "Search (e.g. 2)",
-                      icon: FeatherIcons.search,
-                      isSensitive: false,
-                    ),
-                  ),
-                ],
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 20),
-                child: ADPNButton(
-                  title: "KHOJ",
-                  onTap: () async {
-                    FocusScopeNode currentFocus = FocusScope.of(context);
-                    if (!currentFocus.hasPrimaryFocus) {
-                      currentFocus.unfocus();
-                    }
-                    if (_inputField == null ||
-                        _inputField == "" ||
-                        _searchField == null ||
-                        _searchField == "") {
-                      errorAlert(context, "Give me some Input. Will You?");
-                    } else {
-                      var inputData = _inputField;
-                      var searchData = _searchField;
-                      bool valid = true;
-                      int searchNumber;
-                      List<int> inputNumbers = [];
-                      List inputList;
-
-                      inputData = inputData.split(" ").join("");
-                      inputList = inputData.split(",");
-                      for (var i in inputList) {
-                        try {
-                          inputNumbers.add(int.parse(i));
-                        } catch (e) {
-                          valid = false;
-                          print(e);
-                          errorAlert(context,
-                              "Only put INTEGERS separated by comma in the input field");
-                        }
-                      }
-                      inputNumbers.sort((b, a) => a.compareTo(b));
-                      print(inputNumbers);
-                      try {
-                        searchNumber = int.parse(searchData.trim());
-                      } catch (e) {
-                        valid = false;
-                        errorAlert(context,
-                            "Only put one integer. nothing more, nothing less");
-                      }
-
-                      if (valid) {
-                        _result = null;
-                        for (int i in inputNumbers) {
-                          if (i == searchNumber) {
-                            setState(() {
-                              _result = true;
-                            });
-                          }
-                        }
-                        if (_result == null) {
-                          setState(() {
-                            _result = false;
-                          });
-                        }
-                      }
-                      try {
-                        await _dbProvider.insert(DBProvider.tableName, {
-                          DBProvider.userId: loggedInUser.uid,
-                          DBProvider.timeStamp: DateTime.now().toString(),
-                          DBProvider.values: inputNumbers.toString(),
-                        });
-                      } catch (e) {
-                        print(e);
-                        errorAlert(context, "Some Database Error $e");
-                      }
-                    }
-                  },
-                ),
-              ),
-            ],
-          ),
+        child: GridView.count(
+          padding: EdgeInsets.all(10.0),
+          crossAxisCount: 3,
+          mainAxisSpacing: 10,
+          crossAxisSpacing: 10,
+          children: clickableThumbnail(context),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -224,5 +115,44 @@ class _DekhaoScreenState extends State<DekhaoScreen> {
         },
       ),
     );
+  }
+
+  List<Widget> clickableThumbnail(BuildContext context) {
+    List<Widget> _clickableThumbnails = [];
+    print("Total: ${photos.length}");
+    for (var photo in photos) {
+      _clickableThumbnails.add(
+        GestureDetector(
+          onTap: null,
+          onLongPress: () => showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              content: Text(
+                photo.toString(),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context, 'OK'),
+                  child: Text(
+                    'Close',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          child: CachedNetworkImage(
+            imageUrl: photo.thumbnailUrl,
+            placeholder: (context, url) => CircularProgressIndicator(),
+            errorWidget: (context, url, error) => Icon(FeatherIcons.xCircle),
+          ),
+        ),
+      );
+    }
+    print("clickable: ${_clickableThumbnails.length}");
+    return _clickableThumbnails;
   }
 }
