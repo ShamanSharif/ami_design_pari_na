@@ -8,6 +8,7 @@ class ADPNTextField extends StatefulWidget {
   final Function onChanged;
   final String hintText;
   final TextInputType textInputType;
+  final TextInputAction textInputAction;
   const ADPNTextField({
     Key key,
     @required this.icon,
@@ -15,6 +16,7 @@ class ADPNTextField extends StatefulWidget {
     @required this.onChanged,
     this.hintText,
     this.textInputType,
+    this.textInputAction,
   }) : super(key: key);
 
   @override
@@ -45,8 +47,9 @@ class _ADPNTextFieldState extends State<ADPNTextField> {
             : widget.textInputType,
         obscureText: isObscure,
         cursorColor: brandColor,
-        textInputAction:
-            widget.isSensitive ? TextInputAction.done : TextInputAction.next,
+        textInputAction: widget.textInputAction == null
+            ? TextInputAction.done
+            : widget.textInputAction,
         decoration: InputDecoration(
           suffixIcon: widget.isSensitive
               ? IconButton(

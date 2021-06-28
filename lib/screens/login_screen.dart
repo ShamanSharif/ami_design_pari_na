@@ -1,4 +1,4 @@
-import 'package:ami_design_pari_na/screens/home_screen.dart';
+import 'package:ami_design_pari_na/screens/khoj.dart';
 import 'package:ami_design_pari_na/screens/signup_screen.dart';
 import 'package:ami_design_pari_na/utils/constants.dart';
 import 'package:ami_design_pari_na/utils/secure_storage.dart';
@@ -60,6 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           _email = value;
                         },
                         textInputType: TextInputType.emailAddress,
+                        textInputAction: TextInputAction.next,
                         hintText: "Email",
                         icon: FeatherIcons.atSign,
                         isSensitive: false,
@@ -101,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               });
                               Navigator.pushNamedAndRemoveUntil(
                                 context,
-                                HomeScreen.id,
+                                KhojScreen.id,
                                 (route) => false,
                               );
                             }

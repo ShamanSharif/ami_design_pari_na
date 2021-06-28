@@ -1,4 +1,5 @@
-import 'package:ami_design_pari_na/screens/home_screen.dart';
+import 'package:ami_design_pari_na/screens/dekhao.dart';
+import 'package:ami_design_pari_na/screens/khoj.dart';
 import 'package:ami_design_pari_na/screens/settings_screen.dart';
 import 'package:ami_design_pari_na/screens/login_screen.dart';
 import 'package:ami_design_pari_na/screens/signup_screen.dart';
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
         SplashScreen.id: (context) => SplashScreen(),
         LoginScreen.id: (context) => LoginScreen(),
         SignUpScreen.id: (context) => SignUpScreen(),
-        HomeScreen.id: (context) => HomeScreen(),
+        KhojScreen.id: (context) => KhojScreen(),
+        DekhaoScreen.id: (context) => DekhaoScreen(),
         SettingsScreen.id: (context) => SettingsScreen(),
       },
     );

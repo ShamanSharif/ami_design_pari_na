@@ -1,4 +1,4 @@
-import 'package:ami_design_pari_na/screens/home_screen.dart';
+import 'package:ami_design_pari_na/screens/khoj.dart';
 import 'package:ami_design_pari_na/utils/constants.dart';
 import 'package:ami_design_pari_na/utils/secure_storage.dart';
 import 'package:ami_design_pari_na/widgets/adpn_button.dart';
@@ -63,6 +63,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       _fullname = value;
                     },
                     textInputType: TextInputType.name,
+                    textInputAction: TextInputAction.next,
                     hintText: "Full Name",
                     icon: FeatherIcons.user,
                     isSensitive: false,
@@ -75,6 +76,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       _email = value;
                     },
                     textInputType: TextInputType.emailAddress,
+                    textInputAction: TextInputAction.next,
                     hintText: "Email",
                     icon: FeatherIcons.atSign,
                     isSensitive: false,
@@ -145,7 +147,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   });
                                   Navigator.pushNamedAndRemoveUntil(
                                     context,
-                                    HomeScreen.id,
+                                    KhojScreen.id,
                                     (route) => false,
                                   );
                                 }
