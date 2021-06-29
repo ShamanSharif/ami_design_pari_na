@@ -1,4 +1,4 @@
-![Ami Design Pari Na](./assets/images/logo.png "Logo")
+<img src="./assets/images/logo.png" alt="Ami Design Pari Na Logo" width="200"/>
 
 # Ami Design Pari Na
 
