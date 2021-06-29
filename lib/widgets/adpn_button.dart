@@ -1,6 +1,8 @@
 import 'package:ami_design_pari_na/utils/constants.dart';
 import 'package:flutter/material.dart';
 
+// this is a button widget created for this project with the
+// project brand color suitable for using on various places
 class ADPNButton extends StatelessWidget {
   final String title;
   final Function onTap;
@@ -15,6 +17,7 @@ class ADPNButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: ClipRRect(
+        // this ClipRRect is use for give our button a border radius
         borderRadius: BorderRadius.circular(5),
         child: ColoredBox(
           color: brandColor,

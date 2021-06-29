@@ -14,8 +14,10 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  // creating a instance variable for using Firebase Authentication
   final _auth = FirebaseAuth.instance;
   final _dbProvider = DBProvider.instance;
+  // setting a Secure Storage object for storing and retrieving secure storage data
   final SecureStorage _secureStorage = SecureStorage();
   User loggedInUser;
 
@@ -26,6 +28,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   void getCurrentUser() {
+    // this function is used for getting the current user from firebase
     try {
       final _user = _auth.currentUser;
       if (_user != null) {
@@ -83,7 +86,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
           TextButton(
             onPressed: () async {
               try {
+                // deleting secure storage data
                 await _secureStorage.deleteSecureData('email');
+                // signing out from firebase authentication
+                await _auth.signOut();
+                // navigate back to splash screen
                 Navigator.pushNamedAndRemoveUntil(
                   context,
                   SplashScreen.id,

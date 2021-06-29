@@ -16,7 +16,9 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  // creating a instance variable for using Firebase Authentication
   final _auth = FirebaseAuth.instance;
+  // setting a Secure Storage object for storing and retrieving secure storage data
   final SecureStorage _secureStorage = SecureStorage();
   String _fullname;
   String _email;

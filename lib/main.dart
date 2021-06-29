@@ -23,6 +23,8 @@ class MyApp extends StatelessWidget {
         fontFamily: "Quicksand",
         primarySwatch: Colors.deepPurple,
       ),
+      // I have used a named route for this application,
+      // this initialRoute will be the first Screen this app will serve
       initialRoute: SplashScreen.id,
       routes: {
         SplashScreen.id: (context) => SplashScreen(),
