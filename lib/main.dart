@@ -1,5 +1,6 @@
-import 'package:ami_design_pari_na/screens/dekhao.dart';
-import 'package:ami_design_pari_na/screens/khoj.dart';
+import 'package:ami_design_pari_na/screens/dekhao_screen.dart';
+import 'package:ami_design_pari_na/screens/khoj_screen.dart';
+import 'package:ami_design_pari_na/screens/photo_viewer_screen.dart';
 import 'package:ami_design_pari_na/screens/settings_screen.dart';
 import 'package:ami_design_pari_na/screens/login_screen.dart';
 import 'package:ami_design_pari_na/screens/signup_screen.dart';
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
         SignUpScreen.id: (context) => SignUpScreen(),
         KhojScreen.id: (context) => KhojScreen(),
         DekhaoScreen.id: (context) => DekhaoScreen(),
+        PhotoViewerScreen.id: (context) => PhotoViewerScreen(),
         SettingsScreen.id: (context) => SettingsScreen(),
       },
     );

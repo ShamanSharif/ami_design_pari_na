@@ -1,3 +1,7 @@
+// this class is used for securely store user
+// authenticate data to the application.
+// this class is created with the help of Flutter Secure Storage package
+
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SecureStorage {

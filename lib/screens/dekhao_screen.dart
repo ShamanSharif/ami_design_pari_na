@@ -1,4 +1,5 @@
-import 'package:ami_design_pari_na/screens/khoj.dart';
+import 'package:ami_design_pari_na/screens/khoj_screen.dart';
+import 'package:ami_design_pari_na/screens/photo_viewer_screen.dart';
 import 'package:ami_design_pari_na/screens/settings_screen.dart';
 import 'package:ami_design_pari_na/utils/constants.dart';
 import 'package:ami_design_pari_na/utils/photo.dart';
@@ -103,13 +104,14 @@ class _DekhaoScreenState extends State<DekhaoScreen> {
         ],
         onTap: (index) {
           if (index == 0) {
-            Navigator.push(
+            Navigator.pushAndRemoveUntil(
               context,
               PageTransition(
                 type: PageTransitionType.leftToRightJoined,
                 child: KhojScreen(),
                 childCurrent: DekhaoScreen(),
               ),
+              (route) => false,
             );
           }
         },
@@ -119,11 +121,20 @@ class _DekhaoScreenState extends State<DekhaoScreen> {
 
   List<Widget> clickableThumbnail(BuildContext context) {
     List<Widget> _clickableThumbnails = [];
-    print("Total: ${photos.length}");
     for (var photo in photos) {
       _clickableThumbnails.add(
         GestureDetector(
-          onTap: null,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PhotoViewerScreen(
+                  photos: photos,
+                  currentIndex: photo.id - 1,
+                ),
+              ),
+            );
+          },
           onLongPress: () => showDialog(
             context: context,
             builder: (context) => AlertDialog(
@@ -152,7 +163,6 @@ class _DekhaoScreenState extends State<DekhaoScreen> {
         ),
       );
     }
-    print("clickable: ${_clickableThumbnails.length}");
     return _clickableThumbnails;
   }
 }

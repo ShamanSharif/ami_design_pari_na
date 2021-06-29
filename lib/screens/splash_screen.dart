@@ -1,4 +1,4 @@
-import 'package:ami_design_pari_na/screens/khoj.dart';
+import 'package:ami_design_pari_na/screens/khoj_screen.dart';
 import 'package:ami_design_pari_na/utils/secure_storage.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';

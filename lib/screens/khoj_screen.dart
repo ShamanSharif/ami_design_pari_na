@@ -6,7 +6,7 @@ import 'package:ami_design_pari_na/widgets/adpn_text_field.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:ami_design_pari_na/screens/dekhao.dart';
+import 'package:ami_design_pari_na/screens/dekhao_screen.dart';
 import 'package:page_transition/page_transition.dart';
 
 class KhojScreen extends StatefulWidget {
@@ -100,7 +100,6 @@ class _KhojScreenState extends State<KhojScreen> {
                       onChanged: (value) {
                         _inputField = value;
                       },
-                      textInputType: TextInputType.number,
                       textInputAction: TextInputAction.next,
                       hintText: "Input (e.g. 2,6,3,1,5,...)",
                       icon: FeatherIcons.type,
@@ -212,13 +211,14 @@ class _KhojScreenState extends State<KhojScreen> {
         ],
         onTap: (index) {
           if (index == 1) {
-            Navigator.push(
+            Navigator.pushAndRemoveUntil(
               context,
               PageTransition(
                 type: PageTransitionType.rightToLeftJoined,
                 child: DekhaoScreen(),
                 childCurrent: KhojScreen(),
               ),
+              (route) => false,
             );
           }
         },

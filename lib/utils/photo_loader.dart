@@ -1,3 +1,5 @@
+// this class is used for getting all the photos from given url
+
 import 'package:ami_design_pari_na/utils/network.dart';
 
 class PhotoLoader {

@@ -1,3 +1,6 @@
+// this class is used to make a object that will help to get
+// all the individual photos form the json result
+
 class Photo {
   final int _albumId;
   final int _id;
