@@ -5,6 +5,6 @@ void main() {
   test("parsing item.json over a network", () async {
     var url = "https://jsonplaceholder.typicode.com/photos";
     final res = await http.get(url);
-    expect(res.statusCode, 200);
+    expect(res.statusCode, 404);
   });
 }
