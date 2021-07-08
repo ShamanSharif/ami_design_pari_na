@@ -6,5 +6,6 @@ void main() {
     var url = "https://jsonplaceholder.typicode.com/photos";
     final res = await http.get(url);
     expect(res.statusCode, 200);
+    
   });
 }
