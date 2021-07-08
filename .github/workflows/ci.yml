@@ -34,7 +34,7 @@ jobs:
           channel: "stable"
       - run: flutter pub get
       - run: flutter clean
-      - run: flutter build ios --no-codesign --obfuscate
+      - run: flutter build ios --no-codesign --obfuscate --split-debug-info=ami_design_pari_na/obfuscate
 
 
   build_appbundle:
@@ -51,4 +51,4 @@ jobs:
           channel: "stable"
       - run: flutter pub get
       - run: flutter clean
-      - run: flutter build appbundle --obfuscate
+      - run: flutter build appbundle --obfuscate --split-debug-info=ami_design_pari_na/obfuscate
