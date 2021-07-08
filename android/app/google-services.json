@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1037556083732",
+    "project_id": "amidesignparina",
+    "storage_bucket": "amidesignparina.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1037556083732:android:fa3478f3d0e809e4b2cb01",
+        "android_client_info": {
+          "package_name": "com.shamansharif.ami_design_pari_na"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1037556083732-uo5b421d5akdi5c0edcdop1ndihkel0n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTNLbpy7qqJJ4ikCXGx75mkCxFFksTFWM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1037556083732-uo5b421d5akdi5c0edcdop1ndihkel0n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
