@@ -1,0 +1,5 @@
+environment_config:
+  fields:
+    test_key:
+      default: "ENV Works"
+      dotenv: true

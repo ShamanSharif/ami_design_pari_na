@@ -5,6 +5,7 @@ import 'package:ami_design_pari_na/screens/settings_screen.dart';
 import 'package:ami_design_pari_na/screens/login_screen.dart';
 import 'package:ami_design_pari_na/screens/signup_screen.dart';
 import 'package:ami_design_pari_na/screens/splash_screen.dart';
+import 'package:ami_design_pari_na/screens/tempotary_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -25,8 +26,9 @@ class MyApp extends StatelessWidget {
       ),
       // I have used a named route for this application,
       // this initialRoute will be the first Screen this app will serve
-      initialRoute: SplashScreen.id,
+      initialRoute: TempotaryScreen.id,
       routes: {
+        TempotaryScreen.id: (context) => TempotaryScreen(),
         SplashScreen.id: (context) => SplashScreen(),
         LoginScreen.id: (context) => LoginScreen(),
         SignUpScreen.id: (context) => SignUpScreen(),
