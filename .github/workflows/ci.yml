@@ -1,4 +1,4 @@
-name: CI
+name: Continious Integration and Deployment
 on:
   pull_request:
     branches:
@@ -17,6 +17,7 @@ jobs:
         with:
           channel: "stable"
       - run: flutter pub get
+      - run: flutter pub run environment_config:generate --test_key="Testing Application"
       - run: flutter analyze
       - run: flutter test
 
