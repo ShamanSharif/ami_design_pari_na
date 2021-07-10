@@ -1,3 +1,4 @@
+import 'package:ami_design_pari_na/environment_config.dart';
 import 'package:flutter/material.dart';
 
 class TempotaryScreen extends StatefulWidget {
@@ -17,7 +18,7 @@ class _TempotaryScreenState extends State<TempotaryScreen> {
       ),
       body: SafeArea(
         child: Center(
-          child: Text("Hello"),
+          child: Text(EnvironmentConfig.test_key),
         ),
       ),
     );

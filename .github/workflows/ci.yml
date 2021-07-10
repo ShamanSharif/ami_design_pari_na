@@ -34,6 +34,7 @@ jobs:
           channel: "stable"
       - run: flutter pub get
       - run: flutter clean
+      - run: flutter pub run environment_config:generate --test_key="Evident BD Rocks"
       - run: flutter build ios --no-codesign --obfuscate --split-debug-info=ami_design_pari_na/obfuscate
 
 
@@ -51,4 +52,6 @@ jobs:
           channel: "stable"
       - run: flutter pub get
       - run: flutter clean
-      - run: flutter build appbundle --obfuscate --split-debug-info=ami_design_pari_na/obfuscate
+      - run: flutter pub run environment_config:generate --test_key="Evident BD Rocks"
+      - name: Build AAB
+        run: flutter build appbundle --obfuscate --split-debug-info=ami_design_pari_na/obfuscate
